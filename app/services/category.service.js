@@ -1,36 +1,32 @@
 const { ObjectId } = require("mongodb");
-class BookService {
+class CategoryService {
     constructor(client) {
-        this.Book = client.db().collection("book");
+        this.Category = client.db().collection("category");
     }
     // Định nghĩa các phương thức truy xuất CSDL sử dụng mongodb API
     extractConactData(payload) {
-        const book = {
+        const category = {
             name: payload.name,
-            image: payload.image,
-            favorite: payload.favorite,
-            category_id: payload.category_id,
-            user_id: payload.user_id,
         };
         // Remove undefined fields
-        // Objects.keys(book).forEach(
-        //     (key) => book[key] === undefined && delete book[key]
-        // );
-        return book;
+        // Objects.keys(category).forEach(
+        //     (key) => category[key] === undefined && delete category[key]
+        // );   
+        return category;
     }
 
     async create(payload) {
-        const book = this.extractConactData(payload);
-        const result = await this.Book.findOneAndUpdate(
-            book,
-            { $set: { favorite: book.favorite === true } },
+        const category = this.extractConactData(payload);
+        const result = await this.Category.findOneAndUpdate(
+            category,
+            { $set: {  } },
             { returnDocument: "after", upsert: true }
         );
         return result.value;
     }
 
     async find(filter) {
-        const cursor = await this.Book.find(filter);
+        const cursor = await this.Category.find(filter);
         return await cursor.toArray();
     }
 
@@ -41,7 +37,7 @@ class BookService {
     }
 
     async findById(id) {
-        return await this.Book.findOne({
+        return await this.Category.findOne({
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         });
     }
@@ -51,7 +47,7 @@ class BookService {
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         };
         const update = this.extractConactData(payload);
-        const result = await this.Book.findOneAndUpdate(
+        const result = await this.Category.findOneAndUpdate(
             filter,
             { $set: update },
             { returnDocument: "after" }
@@ -60,19 +56,15 @@ class BookService {
     }
 
     async delete(id) {
-        const result = await this.Book.findOneAndDelete({
+        const result = await this.Category.findOneAndDelete({
             _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
         });
         return result.value;
     }
 
-    async findFavorite() {
-        return await this.find({ favorite: true });
-    }
-
     async deleteAll() {
-        const result = await this.Book.deleteMany({});
+        const result = await this.Category.deleteMany({});
         return result.deletedCount;
     }
 }
-module.exports = BookService;
+module.exports = CategoryService;
