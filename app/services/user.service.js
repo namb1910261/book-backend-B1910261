@@ -8,6 +8,7 @@ class UserService {
         const user = {
             name: payload.name,
             email: payload.email,
+            password: payload.password,
         };
         // Remove undefined fields
         // Objects.keys(user).forEach(
