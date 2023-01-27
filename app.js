@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const booksRouter = require("./app/routes/book.route");
+const booksRouter     = require("./app/routes/book.route");
 const categorysRouter = require("./app/routes/category.route");
-const usersRouter = require("./app/routes/user.route");
+const usersRouter     = require("./app/routes/user.route");
+const reviewsRouter   = require("./app/routes/review.route");
 const ApiError = require("./app/api-error");
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use("/api/books", booksRouter);
 app.use("/api/categorys", categorysRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/reviews", reviewsRouter);
 
 // handle 404 response
 app.use((req, res, next) => {
