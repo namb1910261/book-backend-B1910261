@@ -8,6 +8,9 @@ router.route("/")
     .post(reviews.create)
     .delete(reviews.deleteAll)
 
+router.route("/reviews_user_id/:userid")
+    .get(reviews.findAllReviewByUserId)
+
 router.route("/:id")
     .get(reviews.findOne)
     .put(reviews.update)

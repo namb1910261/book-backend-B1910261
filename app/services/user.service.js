@@ -9,6 +9,7 @@ class UserService {
             name: payload.name,
             email: payload.email,
             password: payload.password,
+            role: payload.role,
         };
         // Remove undefined fields
         // Objects.keys(user).forEach(

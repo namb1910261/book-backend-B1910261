@@ -106,3 +106,19 @@ exports.deleteAll = async (_req, res, next) => {
     }
 };
 
+// Retrieve all category of a user  by user id from the database
+exports.findAllCategoryByUserId = async (req, res, next) => {
+    let documents = [];
+
+    try {
+        const categoryService = new CategoryService(MongoDB.client);
+        documents = await categoryService.findAllCategoryByUser(req.params.userid);
+    } catch (error) {
+        return next(
+            new ApiError(500, "An error occurred while retrieving the categorys by user id")
+        );
+    }
+
+    return res.send(documents);
+};
+

@@ -9,6 +9,7 @@ class ReviewService {
             name: payload.name,
             content: payload.content,
             book_id: payload.book_id,
+            user_id: payload.user_id,
         };
         // Remove undefined fields
         // Objects.keys(review).forEach(
@@ -67,6 +68,12 @@ class ReviewService {
     async deleteAll() {
         const result = await this.Review.deleteMany({});
         return result.deletedCount;
+    }
+
+    async findAllReviewByUser(userid) {
+        return await this.find({
+            user_id: userid,
+        });
     }
 }
 module.exports = ReviewService;

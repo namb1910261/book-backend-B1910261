@@ -8,6 +8,9 @@ router.route("/")
     .post(categorys.create)
     .delete(categorys.deleteAll)
 
+router.route("/categorys_user_id/:userid")
+    .get(categorys.findAllCategoryByUserId)
+
 router.route("/:id")
     .get(categorys.findOne)
     .put(categorys.update)

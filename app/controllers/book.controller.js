@@ -51,7 +51,7 @@ exports.findOne = async (req, res, next) => {
         return res.send(document);
     } catch (error) {
         return next(
-            new ApiError(500, `Error retrieving book with id=${req.param.id}`)
+            new ApiError(500, `Error retrieving book with id=${req.params.id}`)
         );
     }
 };
@@ -117,5 +117,20 @@ exports.deleteAll = async (_req, res, next) => {
             new ApiError(500, "An error occurred while removing all books")
         );
     }
+};
+
+// Retrieve all book of a user  by user id from the database
+exports.findAllBookByUserId = async (req, res, next) => {
+    let documents = [];
+    try {
+        const bookService = new BookService(MongoDB.client);
+        documents = await bookService.findAllBookByUser(req.params.userid);
+    } catch (error) {
+        return next(
+            new ApiError(500, "An error occurred while retrieving the books by user id")
+        );
+    }
+
+    return res.send(documents);
 };
 

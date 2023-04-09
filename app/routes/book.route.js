@@ -11,6 +11,9 @@ router.route("/")
 router.route("/favorite")
     .get(books.findAllFavorite)
 
+router.route("/books_user_id/:userid")
+    .get(books.findAllBookByUserId)
+
 router.route("/:id")
     .get(books.findOne)
     .put(books.update)

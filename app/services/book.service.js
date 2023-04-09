@@ -65,14 +65,20 @@ class BookService {
         });
         return result.value;
     }
-
+    
     async findFavorite() {
         return await this.find({ favorite: true });
     }
-
+    
     async deleteAll() {
         const result = await this.Book.deleteMany({});
         return result.deletedCount;
+    }
+    
+    async findAllBookByUser(userid) {
+        return await this.find({
+            user_id: userid ,
+        });
     }
 }
 module.exports = BookService;

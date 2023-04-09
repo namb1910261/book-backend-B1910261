@@ -7,6 +7,7 @@ class CategoryService {
     extractConactData(payload) {
         const category = {
             name: payload.name,
+            user_id: payload.user_id,
         };
         // Remove undefined fields
         // Objects.keys(category).forEach(
@@ -19,7 +20,7 @@ class CategoryService {
         const category = this.extractConactData(payload);
         const result = await this.Category.findOneAndUpdate(
             category,
-            { $set: {  } },
+            { $set: {} },
             { returnDocument: "after", upsert: true }
         );
         return result.value;
@@ -65,6 +66,12 @@ class CategoryService {
     async deleteAll() {
         const result = await this.Category.deleteMany({});
         return result.deletedCount;
+    }
+
+    async findAllCategoryByUser(userid) {
+        return await this.find({
+            user_id: userid,
+        });
     }
 }
 module.exports = CategoryService;
