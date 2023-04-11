@@ -74,6 +74,13 @@ class BookService {
         const result = await this.Book.deleteMany({});
         return result.deletedCount;
     }
+
+    async deleteByUser(userid) {
+        const result = await this.Book.deleteMany({
+            user_id: userid,
+        });
+        return result.deletedCount;
+    }
     
     async findAllBookByUser(userid) {
         return await this.find({

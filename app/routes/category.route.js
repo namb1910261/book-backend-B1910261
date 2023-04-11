@@ -10,6 +10,8 @@ router.route("/")
 
 router.route("/categorys_user_id/:userid")
     .get(categorys.findAllCategoryByUserId)
+router.route("/categorys_user_id/delete/:userid")
+    .delete(categorys.deleteByUserId)
 
 router.route("/:id")
     .get(categorys.findOne)

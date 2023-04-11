@@ -91,6 +91,22 @@ exports.delete = async (req, res, next) => {
     }
 };
 
+// delete a review with the specified user id in the request
+exports.deleteByUserId = async (req, res, next) => {
+    try {
+        const reviewService = new ReviewService(MongoDB.client);
+        const document = await reviewService.deleteByUser(req.params.userid);
+        if (!document) {
+            return next(new ApiError(404, "Review not found"));
+        }
+        return res.send({ message: "Review was deleted successfully" });
+    } catch (error) {
+        return next(
+            new ApiError(500, `Could not delete review with user id=${req.params.userid}`)
+        );
+    }
+};
+
 // Delete all reviews of a user from the database
 exports.deleteAll = async (_req, res, next) => {
     try {

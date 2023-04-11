@@ -104,6 +104,22 @@ exports.findAllFavorite = async (_req, res, next) => {
     }
 };
 
+// delete a book with the specified user id in the request
+exports.deleteByUserId = async (req, res, next) => {
+    try {
+        const bookService = new BookService(MongoDB.client);
+        const document = await bookService.deleteByUser(req.params.userid);
+        if (!document) {
+            return next(new ApiError(404, "Book not found"));
+        }
+        return res.send({ message: "Book was deleted successfully" });
+    } catch (error) {
+        return next(
+            new ApiError(500, `Could not delete book with user id=${req.params.userid}`)
+        );
+    }
+};
+
 // Delete all books of a user from the database
 exports.deleteAll = async (_req, res, next) => {
     try {

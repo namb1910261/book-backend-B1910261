@@ -65,6 +65,13 @@ class ReviewService {
         return result.value;
     }
 
+    async deleteByUser(userid) {
+        const result = await this.Review.deleteMany({
+            user_id: userid,
+        });
+        return result.deletedCount;
+    }
+
     async deleteAll() {
         const result = await this.Review.deleteMany({});
         return result.deletedCount;

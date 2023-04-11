@@ -10,6 +10,8 @@ router.route("/")
 
 router.route("/reviews_user_id/:userid")
     .get(reviews.findAllReviewByUserId)
+router.route("/reviews_user_id/delete/:userid")
+    .delete(reviews.deleteByUserId)
 
 router.route("/:id")
     .get(reviews.findOne)

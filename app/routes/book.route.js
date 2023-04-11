@@ -13,6 +13,8 @@ router.route("/favorite")
 
 router.route("/books_user_id/:userid")
     .get(books.findAllBookByUserId)
+router.route("/books_user_id/delete/:userid")
+    .delete(books.deleteByUserId)
 
 router.route("/:id")
     .get(books.findOne)

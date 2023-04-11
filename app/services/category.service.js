@@ -63,6 +63,13 @@ class CategoryService {
         return result.value;
     }
 
+    async deleteByUser(userid) {
+        const result = await this.Category.deleteMany({
+            user_id: userid,
+        });
+        return result.deletedCount;
+    }
+
     async deleteAll() {
         const result = await this.Category.deleteMany({});
         return result.deletedCount;
