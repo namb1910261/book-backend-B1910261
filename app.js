@@ -4,6 +4,7 @@ const booksRouter     = require("./app/routes/book.route");
 const categorysRouter = require("./app/routes/category.route");
 const usersRouter     = require("./app/routes/user.route");
 const reviewsRouter   = require("./app/routes/review.route");
+const commentsRouter  = require("./app/routes/comment.route");
 const ApiError = require("./app/api-error");
 
 const app = express();
@@ -15,6 +16,7 @@ app.use("/api/books", booksRouter);
 app.use("/api/categorys", categorysRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/reviews", reviewsRouter);
+app.use("/api/comments", commentsRouter);
 
 // handle 404 response
 app.use((req, res, next) => {
